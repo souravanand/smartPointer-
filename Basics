@@ -1,0 +1,33 @@
+Why c++ do not need any garbage collector?
+Because Bjarne told, we can eliminate the use of garbage collection by not producing any garbage.
+C++ does not create any garbage,its the developer who creates garbage.
+
+Its the responsblity of developer to deallocate dynamically allocated memory.
+
+#include<iostream>
+using namespace std;
+class box{
+public:
+int x;
+
+box()=default;
+box(int a):x(a){}
+
+box* add(box a,box b)
+{
+    box *c=new box();
+    c->x=a.x + b.x;
+    return c;
+}
+
+};
+int main()
+{
+    box a1(10),a2(19);
+    box *obj=new box();
+    cout<<(obj->add(a1,a2))->x;
+}
+
+Here  developer forget to delete obj and it can lead to memory leak;
+
+we can use this example to show why we need to specify default constructor, when we do not want to initialize object and we have parameterized constructor
